@@ -28,7 +28,6 @@ def specific_window_hists(img, wind_width, wind_height, window_list):
 
         if image_counter == window_list[0] or image_counter == window_list[1] or image_counter == window_list[2] \
                 or image_counter == window_list[3]:
-
             n, bins = np.histogram(window.ravel(), 256, [0, 256])
             mids = 0.5 * (bins[1:] + bins[:-1])
             mean = np.average(mids, weights=n)
@@ -122,3 +121,56 @@ def window_hists(img, window_width, window_height):
 
     plt.show()
 
+
+def barchart_all_orient(mount_angles, rock_angles):
+    # create plot
+    fig, ax = plt.subplots()
+    index = np.arange(10)
+    bar_width = 0.35
+    opacity = 0.8
+
+    plt.bar(index, mount_angles, bar_width,
+            alpha=opacity,
+            color='b',
+            label='mount_angles')
+
+    plt.bar(index + bar_width, rock_angles, bar_width,
+            alpha=opacity,
+            color='g',
+            label='rock_angles')
+
+    plt.xlabel('radius')
+    plt.ylabel('Values')
+    plt.title('Barchart of all collapsed frequencies in a particular radius')
+    plt.xticks(index + bar_width, ('10', '20', '30', '40', '50', '60', '70', '80', '90', '100'))
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+
+def barchart_particular_orient(first_angles, second_angles):
+    # create plot
+    fig, ax = plt.subplots()
+    index = np.arange(4)
+    bar_width = 0.35
+    opacity = 0.8
+
+    plt.bar(index, first_angles, bar_width,
+            alpha=opacity,
+            color='b',
+            label='mount_angles')
+
+    plt.bar(index + bar_width, second_angles, bar_width,
+            alpha=opacity,
+            color='g',
+            label='rock_angles')
+
+    plt.xlabel('Angles')
+    plt.ylabel('Values')
+    plt.title('Barchart of all collapsed frequencies in a particular orientation')
+    plt.xticks(index + bar_width, ('zero deg', '45 deg', '90 deg', '135 deg'))
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
