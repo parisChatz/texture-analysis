@@ -54,8 +54,13 @@ angles = [0, np.pi/4, np.pi/2, 3*np.pi/4]
 # distances = [1]
 # angles = [0]
 
-
+depth = 8
 for patch in (mountain_patches + smooth_mnt_top_patches + linear_slope_patches + rocky_plains_patches):
+    division = int(256/(2**depth))
+    patch = np.divide(patch, division)
+    patch = np.round(patch, decimals=0)
+    patch = patch.astype(np.uint8)
+
     glcm = greycomatrix(patch, distances=distances, angles=angles, levels=255, symmetric=True, normed=True)
     con = np.average(greycoprops(glcm, 'contrast'))
     dis = np.average(greycoprops(glcm, 'dissimilarity'))
@@ -68,4 +73,4 @@ for patch in (mountain_patches + smooth_mnt_top_patches + linear_slope_patches +
 
 
 print(metrics.head(20))
-metrics.to_csv("/home/paris/PycharmProjects/Texture-Analysis/docu/metrics_low_bit.csv")
+metrics.to_csv("/home/paris/PycharmProjects/Texture-Analysis/docu/metrics_8_bit.csv")
