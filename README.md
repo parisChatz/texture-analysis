@@ -19,7 +19,7 @@ Clone repository
 ```
 git clone https://github.com/parisChatz/Image-Segmentation.git
 ```
-###Install requirements
+### Install requirements
 ```
 sudo pip3 install -r requirements.txt
 ```
